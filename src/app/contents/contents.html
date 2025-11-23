@@ -1,0 +1,30 @@
+<div class="contents-container">
+  <h2>Your Contents</h2>
+
+  <p class="message" [ngClass]="{ error: message.includes('❌') }">{{ message }}</p>
+
+  <div *ngIf="isLoading" class="loading">Loading contents...</div>
+
+  <div *ngIf="!isLoading && contents.length === 0" class="no-content">
+    No contents available.
+  </div>
+
+  <div *ngIf="!isLoading && contents.length > 0" class="contents-list">
+    <div *ngFor="let content of contents" class="content-card">
+      <h3>{{ content.title }}</h3>
+      <p>{{ content.description }}</p>
+
+      <ul *ngIf="content.keyPoints.length > 0" class="keypoints">
+        <li *ngFor="let kp of content.keyPoints">{{ kp }}</li>
+      </ul>
+
+      <div class="files" *ngIf="content.files.length > 0">
+        <div *ngFor="let file of content.files" class="file-item">
+          <a [href]="file" target="_blank">View / Download</a>
+        </div>
+      </div>
+
+      <p class="timestamp">Created: {{ content.timestamp | date:'medium' }}</p>
+    </div>
+  </div>
+</div>

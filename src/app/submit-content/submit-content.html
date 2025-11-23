@@ -1,0 +1,57 @@
+<div class="submit-container">
+  <h2>Submit New Content</h2>
+
+  <p class="message" [ngClass]="{ error: message.includes('Error') }">
+    {{ message }}
+  </p>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Product / Service Name:</label>
+      <input type="text" [(ngModel)]="productName" name="productName" required />
+    </div>
+
+    <div class="form-group">
+      <label>Upload Files (Images, Videos, or Audio):</label>
+      <input type="file" (change)="onFileSelected($event)" multiple />
+    </div>
+
+    <div class="form-group">
+      <label>Description (max 400 characters):</label>
+      <textarea
+        [(ngModel)]="description"
+        name="description"
+        maxlength="400"
+        rows="5"
+        placeholder="Describe your product or service..."
+      ></textarea>
+      <p class="char-count">{{ description.length }}/400</p>
+    </div>
+
+    <div class="form-group keypoints">
+      <label>Key Points:</label>
+      <input
+        type="text"
+        [(ngModel)]="keyPoint1"
+        name="keyPoint1"
+        placeholder="Key Point 1"
+      />
+      <input
+        type="text"
+        [(ngModel)]="keyPoint2"
+        name="keyPoint2"
+        placeholder="Key Point 2"
+      />
+      <input
+        type="text"
+        [(ngModel)]="keyPoint3"
+        name="keyPoint3"
+        placeholder="Key Point 3"
+      />
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+    </button>
+  </form>
+</div>

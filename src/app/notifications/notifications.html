@@ -1,0 +1,19 @@
+<div class="notifications-container">
+  <h2>Notifications</h2>
+
+  <p class="message" [ngClass]="{ error: message.includes('Error') }">{{ message }}</p>
+
+  <div *ngIf="isLoading">Loading notifications...</div>
+
+  <div *ngIf="!isLoading && notifications.length === 0">
+    No notifications yet.
+  </div>
+
+  <ul *ngIf="notifications.length > 0">
+    <li *ngFor="let notif of notifications" [class.read]="notif.read">
+      <p>{{ notif.message }}</p>
+      <small>{{ notif.date | date:'medium' }}</small>
+      <button *ngIf="!notif.read" (click)="markAsRead(notif.id)">Mark as Read</button>
+    </li>
+  </ul>
+</div>

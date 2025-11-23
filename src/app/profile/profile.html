@@ -1,0 +1,52 @@
+<div class="profile-container">
+  <h2>User Profile</h2>
+
+  <p class="message" [ngClass]="{ error: isError }">{{ message }}</p>
+
+  <div class="profile-image-section">
+    <img
+      [src]="previewUrl || user.profilePictureUrl || 'assets/default-avatar.png'"
+      alt="Profile Picture"
+      class="profile-img"
+    />
+  </div>
+
+  <form (ngSubmit)="onSubmit()" *ngIf="user">
+    <div>
+      <label>Profile Picture:</label>
+      <input type="file" (change)="onFileSelected($event)" [disabled]="!canEdit" />
+    </div>
+
+    <div>
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="user.name" name="name" [disabled]="!canEdit" />
+    </div>
+
+    <div>
+      <label>Company Name:</label>
+      <input type="text" [(ngModel)]="user.companyName" name="companyName" [disabled]="!canEdit" />
+    </div>
+
+    <div>
+      <label>Country:</label>
+      <input type="text" [(ngModel)]="user.country" name="country" [disabled]="!canEdit" />
+    </div>
+
+    <div>
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="user.email" name="email" [disabled]="!canEdit" />
+    </div>
+
+    <button type="submit" [disabled]="!canEdit">Update Profile</button>
+  </form>
+
+  <p class="edit-info" *ngIf="!canEdit">
+    You can edit your profile only after 3 months from your last update.
+  </p>
+
+  <a routerLink = "/submit-content"> go</a>
+  <a routerLink = "/contact-staff"> ho</a>
+  <a routerLink = "/contents"> lo</a>
+    <a routerLink = "/notifications"> no</a>
+      <a routerLink = "/logout"> jo</a>
+</div>
